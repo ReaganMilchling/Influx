@@ -16,8 +16,12 @@ public class Main extends Application
     //Variables
     protected static int HEIGHT = 645;
     protected static int WIDTH = (int)(HEIGHT * 1.7778f);
+    protected static int thirdWidth = (int)(WIDTH / 3);
+    protected static int thirdHeight = (int)(HEIGHT / 3);
+    protected static int halfWidth = (int)(WIDTH / 2);
+    protected static int halfHeight = (int)(HEIGHT / 2);
+    protected static int fourthHeight = (int)(HEIGHT / 4);
     protected static int Frames, Score;
-    //private boolean running = false;
     public static STATE gameState = STATE.Menu;
     Image background = new Image("res/images/board.png");
 
@@ -33,6 +37,9 @@ public class Main extends Application
     private static HUD hud;
     private static Handler handler;
     private Menu menu;
+    private Options options;
+    private HighScores highscores;
+    private HowTo howto;
 
 
     public static void setGame(Scene theScene) {
@@ -44,16 +51,29 @@ public class Main extends Application
         if (gameState == STATE.Game) {
             //handler.addObject(new EnemyOne(WIDTH/2, HEIGHT/2, 24, ID.Enemy1));
             //handler.addObject(new EnemyAI(WIDTH - 32, HEIGHT - 32, 24, ID.Enemy2, handler));
-            handler.addObject(new Player(0, 0, 32, ID.Player, handler));
+            handler.addObject(new Player(halfWidth, halfHeight, 32, ID.Player, handler));
             KeyInput.keyEventHandler(theScene, handler);
         }
     }
 
     public static void setMenu(Scene theScene)
     {
-        if (gameState == STATE.Menu) {
-            KeyInput.keyEventHandlerMenu(theScene);
-        }
+        KeyInput.keyEventHandlerMenu(theScene);
+    }
+
+    public static void setOptions(Scene theScene)
+    {
+        KeyInput.keyEventHandlerOptions(theScene);
+    }
+
+    public static void setHowTo(Scene theScene)
+    {
+        KeyInput.keyEventHandlerHowTo(theScene);
+    }
+
+    public static void setHighScores(Scene theScene)
+    {
+        KeyInput.keyEventHandlerHighScores(theScene);
     }
 
     @Override
@@ -61,6 +81,9 @@ public class Main extends Application
     {
 
         menu = new Menu();
+        options = new Options();
+        highscores = new HighScores();
+        howto = new HowTo();
 
         Pane root = new Pane();
         Scene theScene = new Scene(root);
@@ -123,6 +146,12 @@ public class Main extends Application
             hud.tick();
         } else if (gameState == STATE.Menu) {
             menu.tick();
+        } else if (gameState == STATE.Options) {
+            options.tick();
+        } else if (gameState == STATE.HowTo) {
+            howto.tick();
+        } else if (gameState == STATE.HighScore) {
+            highscores.tick();
         }
 
     }
@@ -136,6 +165,12 @@ public class Main extends Application
 
         } else if (gameState == STATE.Menu) {
             menu.render(gc);
+        } else if (gameState == STATE.Options) {
+            options.render(gc);
+        } else if (gameState == STATE.HowTo) {
+            howto.render(gc);
+        } else if (gameState == STATE.HighScore) {
+            highscores.render(gc);
         }
 
     }

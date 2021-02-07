@@ -26,6 +26,72 @@ public class KeyInput {
                     Main.setGameState(Main.STATE.Game);
                     Main.setGame(scene);
                 }
+                if (keyEvent.getCode() == KeyCode.O)
+                {
+                    Main.setGameState(Main.STATE.Options);
+                    Main.setOptions(scene);
+                }
+                if (keyEvent.getCode() == KeyCode.L)
+                {
+                    Main.setGameState(Main.STATE.HowTo);
+                    Main.setHowTo(scene);
+                }
+                if (keyEvent.getCode() == KeyCode.H)
+                {
+                    Main.setGameState(Main.STATE.HighScore);
+                    Main.setHighScores(scene);
+                }
+                if (keyEvent.getCode() == KeyCode.ESCAPE){
+                    System.exit(1);
+                }
+            }
+        });
+    }
+
+    public static void keyEventHandlerOptions(Scene scene)
+    {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+                if (keyEvent.getCode() == KeyCode.TAB){
+                    Main.setGameState(Main.STATE.Menu);
+                    Main.setMenu(scene);
+                }
+                if (keyEvent.getCode() == KeyCode.ESCAPE){
+                    System.exit(1);
+                }
+            }
+        });
+    }
+
+    public static void keyEventHandlerHowTo(Scene scene)
+    {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+                if (keyEvent.getCode() == KeyCode.TAB){
+                    Main.setGameState(Main.STATE.Menu);
+                    Main.setMenu(scene);
+                }
+                if (keyEvent.getCode() == KeyCode.ESCAPE){
+                    System.exit(1);
+                }
+            }
+        });
+    }
+
+    public static void keyEventHandlerHighScores(Scene scene)
+    {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+
+                if (keyEvent.getCode() == KeyCode.TAB){
+                    Main.setGameState(Main.STATE.Menu);
+                    Main.setMenu(scene);
+                }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
                 }
