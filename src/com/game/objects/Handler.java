@@ -2,7 +2,6 @@ package com.game.objects;
 
 import com.game.objects.GameObject;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import java.util.LinkedList;
 
 public class Handler
@@ -19,7 +18,6 @@ public class Handler
             tempObject.tick();
         }
     }
-
     //handler for all rendering of objects
     public void renderObject(GraphicsContext gc)
     {

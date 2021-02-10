@@ -12,7 +12,6 @@ public class Player extends GameObject
 {
     //attributes/fields
     private final Handler handler;
-    private int playerHealth;
     Image playerImage;
     Image creeper = new Image("res/images/creeper.png");
     Image space = new Image("res/images/space.png");
@@ -76,10 +75,6 @@ public class Player extends GameObject
         }
     }
 
-    public int getHealth()
-    {
-        return this.playerHealth;
-    }
 
     public Rectangle getHitBox()
     {

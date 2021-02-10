@@ -1,10 +1,7 @@
 package com.game;
 
 import com.game.menu.*;
-import com.game.objects.HUD;
-import com.game.objects.Handler;
-import com.game.objects.KeyInput;
-import com.game.objects.Player;
+import com.game.objects.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +14,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-
     //Variables
     public static int HEIGHT = 645;
     public static int WIDTH = (int)(HEIGHT * 1.7778f);
@@ -27,16 +23,52 @@ public class Main extends Application
     public static int halfHeight = (int)(HEIGHT / 2);
     public static int fourthHeight = (int)(HEIGHT / 4);
     public static int Frames, Score;
+
     public static STATE gameState = STATE.Menu;
     Image background = new Image("res/images/board.png");
 
-
     public enum STATE {
-        Game,
-        Menu,
-        Options,
-        HowTo,
-        HighScore
+        Game{
+            @Override
+            public void setState(Scene theScene) {
+                handler = new Handler();
+                hud = new HUD();
+                hud.HUD(handler);
+                Score = 0;
+
+                if (gameState == STATE.Game) {
+                    handler.addObject(new EnemyOne(WIDTH/2, HEIGHT/2, 32, ID.Enemy1));
+                    handler.addObject(new EnemyAI(WIDTH - 32, HEIGHT - 32, 24, ID.Enemy2, handler));
+                    handler.addObject(new Player(halfWidth, halfHeight, 32, ID.Player, handler));
+                    KeyInput.keyEventHandler(theScene, handler);
+                }
+            }
+        },
+        Menu {
+            @Override
+            public void setState(Scene theScene) {
+                KeyInput.keyEventHandlerMenu(theScene);
+            }
+        },
+        Options {
+            @Override
+            public void setState(Scene theScene) {
+                KeyInput.keyEventHandlerOptions(theScene);
+            }
+        },
+        HowTo {
+            @Override
+            public void setState(Scene theScene) {
+                KeyInput.keyEventHandlerHowTo(theScene);
+            }
+        },
+        HighScore {
+            @Override
+            public void setState(Scene theScene) {
+                KeyInput.keyEventHandlerHighScores(theScene);
+            }
+        };
+        public abstract void setState(Scene theScene);
     }
 
     private static HUD hud;
@@ -45,41 +77,6 @@ public class Main extends Application
     private Options options;
     private HighScores highscores;
     private HowTo howto;
-
-
-    public static void setGame(Scene theScene) {
-        handler = new Handler();
-        hud = new HUD();
-        hud.HUD(handler);
-        Score = 0;
-
-        if (gameState == STATE.Game) {
-            //handler.addObject(new EnemyOne(WIDTH/2, HEIGHT/2, 24, ID.Enemy1));
-            //handler.addObject(new EnemyAI(WIDTH - 32, HEIGHT - 32, 24, ID.Enemy2, handler));
-            handler.addObject(new Player(halfWidth, halfHeight, 32, ID.Player, handler));
-            KeyInput.keyEventHandler(theScene, handler);
-        }
-    }
-
-    public static void setMenu(Scene theScene)
-    {
-        KeyInput.keyEventHandlerMenu(theScene);
-    }
-
-    public static void setOptions(Scene theScene)
-    {
-        KeyInput.keyEventHandlerOptions(theScene);
-    }
-
-    public static void setHowTo(Scene theScene)
-    {
-        KeyInput.keyEventHandlerHowTo(theScene);
-    }
-
-    public static void setHighScores(Scene theScene)
-    {
-        KeyInput.keyEventHandlerHighScores(theScene);
-    }
 
     @Override
     public void start(Stage gameStage) throws Exception
@@ -99,7 +96,7 @@ public class Main extends Application
 
         gameStage.setTitle("Influx");
         gameStage.setScene(theScene);
-        setMenu(theScene);
+        STATE.Menu.setState(theScene);
 
         /**
          * Main game loop
@@ -112,24 +109,19 @@ public class Main extends Application
             double delta = 0;
             long timer = System.currentTimeMillis();
             int frames = 0;
-
             @Override
             public void handle(long now)
             {
-
                 //long now = System.nanoTime();
                 delta += (now - lastTime) / ns;
                 lastTime = now;
-
                 while (delta >= 1)
                 {
                     tick();
                     delta--;
                 }
-
                 render(gc);
                 frames++;
-
                 if (System.currentTimeMillis() - timer > 1000)
                 {
                     timer += 1000;
@@ -138,9 +130,7 @@ public class Main extends Application
                 }
             }
         }.start();
-
         gameStage.show();
-
     }
 
     private void tick()
@@ -163,6 +153,7 @@ public class Main extends Application
 
     public void render(GraphicsContext gc)
     {
+        //draws everything
         if (gameState == STATE.Game) {
             gc.drawImage(background, 0 , 0, 1152, 648, 0, 0, WIDTH, HEIGHT);
             hud.renderObject(gc);

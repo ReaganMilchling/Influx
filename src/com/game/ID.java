@@ -6,5 +6,5 @@ public enum ID {
     Enemy1(),
     Enemy2(),
     Torch(),
-    Cat()
+    Cat();
 }

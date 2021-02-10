@@ -13,7 +13,7 @@ public abstract class GameObject
     protected int highSpeed, medSpeed, lowSpeed;
     protected boolean moveRight, moveLeft, moveUp, moveDown;
     protected ID id;
-
+    protected int playerHealth = 0;
     //constructor
     public GameObject(int x, int y, int size, ID id)
     {
@@ -70,6 +70,9 @@ public abstract class GameObject
     }
     public ID getID() {
         return id;
+    }
+    public int getPlayerHealth() {
+        return this.playerHealth;
     }
 
     //setters

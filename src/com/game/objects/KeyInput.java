@@ -8,14 +8,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class KeyInput {
-
-//    private Handler handler;
-//    private Scene scene;
+    //Variables
 
     public KeyInput()
     {
-//        this.handler = handler;
-//        this.scene = scene;
+        //nothing to construct
     }
 
     public static void keyEventHandlerMenu(Scene scene)
@@ -26,22 +23,22 @@ public class KeyInput {
                 if (keyEvent.getCode() == KeyCode.SPACE)
                 {
                     Main.setGameState(Main.STATE.Game);
-                    Main.setGame(scene);
+                    Main.STATE.Game.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.O)
                 {
                     Main.setGameState(Main.STATE.Options);
-                    Main.setOptions(scene);
+                    Main.STATE.Options.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.L)
                 {
                     Main.setGameState(Main.STATE.HowTo);
-                    Main.setHowTo(scene);
+                    Main.STATE.HowTo.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.H)
                 {
                     Main.setGameState(Main.STATE.HighScore);
-                    Main.setHighScores(scene);
+                    Main.STATE.HighScore.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -58,7 +55,7 @@ public class KeyInput {
 
                 if (keyEvent.getCode() == KeyCode.TAB){
                     Main.setGameState(Main.STATE.Menu);
-                    Main.setMenu(scene);
+                    Main.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -75,7 +72,7 @@ public class KeyInput {
 
                 if (keyEvent.getCode() == KeyCode.TAB){
                     Main.setGameState(Main.STATE.Menu);
-                    Main.setMenu(scene);
+                    Main.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -92,7 +89,7 @@ public class KeyInput {
 
                 if (keyEvent.getCode() == KeyCode.TAB){
                     Main.setGameState(Main.STATE.Menu);
-                    Main.setMenu(scene);
+                    Main.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -125,7 +122,7 @@ public class KeyInput {
                 }
                 if (keyEvent.getCode() == KeyCode.TAB){
                     Main.setGameState(Main.STATE.Menu);
-                    Main.setMenu(scene);
+                    Main.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);

@@ -15,46 +15,30 @@ public class EnemyAI extends GameObject
     {
         super(x, y, size, id);
         this.handler = handler;
-
         velX = 3;
         velY = 3;
-
-
     }
 
     public void tick()
     {
-        //
+        //Changes direction of this object to move toward player
         for (int i = 0; i < handler.object.size(); i++)
         {
             GameObject temp = handler.object.get(i);
             if (temp.getID() == ID.Player)
             {
-                if(Math.abs((int)((x - temp.getX()))) == 0){
-                    x -= (int)((
-                            (x - temp.getX())
-                    ) * velX);
-                }else{
-                    x -= (int)((
-                            (x - temp.getX()) / (Math.abs((int)((x - temp.getX()))))
-                    ) * velX);
+                if (Math.abs(x - temp.getX()) == 0) {
+                    x -= ((x - temp.getX()) * velX);
+                } else {
+                    x -= (((x - temp.getX()) / (Math.abs(x - temp.getX()))) * velX);
                 }
-
-                if(Math.abs((int)((y - temp.getY()))) == 0){
-                    y -= (int)((
-                            (y - temp.getY())
-                    ) * velY);
-                }else{
-                    y -= (int)((
-                            (y - temp.getY()) / (Math.abs((int)((y - temp.getY()))))
-                    ) * velY);
+                if (Math.abs(y - temp.getY()) == 0) {
+                    y -= ((y - temp.getY()) * velY);
+                } else {
+                    y -= (((y - temp.getY()) / (Math.abs(y - temp.getY()))) * velY);
                 }
-
             }
         }
-
-
-
         x = constrain(x, 0, Main.WIDTH - objectSize);
         y = constrain(y, 0, Main.HEIGHT - objectSize);
     }
