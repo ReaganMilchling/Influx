@@ -1,8 +1,9 @@
-package com.game.objects;
+package com.game.gameObjects;
 
 
+import com.game.engine.GameUtils;
+import com.game.engine.Handler;
 import com.game.ID;
-import com.game.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.awt.Rectangle;
@@ -22,9 +23,9 @@ public class EnemyAI extends GameObject
     public void tick()
     {
         //Changes direction of this object to move toward player
-        for (int i = 0; i < handler.object.size(); i++)
+        for (int i = 0; i < handler.getList().size(); i++)
         {
-            GameObject temp = handler.object.get(i);
+            GameObject temp = (GameObject) handler.getList().get(i);
             if (temp.getID() == ID.Player)
             {
                 if (Math.abs(x - temp.getX()) == 0) {
@@ -39,8 +40,8 @@ public class EnemyAI extends GameObject
                 }
             }
         }
-        x = constrain(x, 0, Main.WIDTH - objectSize);
-        y = constrain(y, 0, Main.HEIGHT - objectSize);
+        x = constrain(x, 0, GameUtils.WIDTH - objectSize);
+        y = constrain(y, 0, GameUtils.HEIGHT - objectSize);
     }
 
     public void renderObject(GraphicsContext gc)

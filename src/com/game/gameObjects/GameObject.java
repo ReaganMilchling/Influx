@@ -1,4 +1,4 @@
-package com.game.objects;
+package com.game.gameObjects;
 
 import com.game.ID;
 import javafx.scene.canvas.GraphicsContext;
@@ -47,6 +47,18 @@ public abstract class GameObject
     }
 
     //getters
+    public boolean getMoveDown() {
+        return this.moveDown;
+    }
+    public boolean getMoveUp() {
+        return this.moveUp;
+    }
+    public boolean getMoveRight() {
+        return this.moveRight;
+    }
+    public boolean getMoveLeft() {
+        return this.moveLeft;
+    }
     public int getX() {
         return x;
     }

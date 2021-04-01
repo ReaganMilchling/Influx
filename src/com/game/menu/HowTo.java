@@ -1,6 +1,7 @@
 package com.game.menu;
 
 import com.game.Main;
+import com.game.engine.GameUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -24,12 +25,11 @@ public class HowTo {
     public void render(GraphicsContext gc)
     {
 
-        gc.drawImage(background, 0 , 0, 1920, 1080, 0, 0, Main.WIDTH, Main.HEIGHT);
+        gc.drawImage(background, 0 , 0, 1920, 1080, 0, 0, GameUtils.WIDTH, GameUtils.HEIGHT);
 
         gc.setFill(Color.BLACK);
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setFont(Font.font("Verdana", 45));
-        gc.fillText("Tutorial", Main.halfWidth, Main.fourthHeight);
+        gc.fillText("Tutorial", GameUtils.halfWidth, GameUtils.fourthHeight);
     }
-
 }

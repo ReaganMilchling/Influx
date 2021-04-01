@@ -1,7 +1,7 @@
-package com.game.objects;
+package com.game.gameObjects;
 
+import com.game.engine.GameUtils;
 import com.game.ID;
-import com.game.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import java.awt.Rectangle;
@@ -25,8 +25,8 @@ public class EnemyOne extends GameObject
         x += velX;
         y += velY;
 
-        if (x <= 0 || x >= Main.WIDTH - objectSize) { velX *= -1; }
-        if (y <= 0 || y >= Main.HEIGHT - objectSize) { velY *= -1; }
+        if (x <= 0 || x >= GameUtils.WIDTH - objectSize) { velX *= -1; }
+        if (y <= 0 || y >= GameUtils.HEIGHT - objectSize) { velY *= -1; }
     }
 
     public void renderObject(GraphicsContext gc)

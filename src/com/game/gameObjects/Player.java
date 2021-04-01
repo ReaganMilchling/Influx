@@ -1,11 +1,11 @@
-package com.game.objects;
+package com.game.gameObjects;
 
+import com.game.engine.GameUtils;
+import com.game.engine.Handler;
 import com.game.ID;
-import com.game.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 
 public class Player extends GameObject
@@ -52,8 +52,8 @@ public class Player extends GameObject
 
         collisions();
 
-        x = constrain(x, 0, Main.WIDTH - objectSize);
-        y = constrain(y, 0, Main.HEIGHT - objectSize);
+        x = constrain(x, 0, GameUtils.WIDTH - objectSize);
+        y = constrain(y, 0, GameUtils.HEIGHT - objectSize);
     }
 
     public void renderObject(GraphicsContext gc)
@@ -63,9 +63,9 @@ public class Player extends GameObject
 
     public void collisions()
     {
-        for (int i = 0; i < handler.object.size(); i++)
+        for (int i = 0; i < handler.getList().size(); i++)
         {
-            GameObject temp = handler.object.get(i);
+            GameObject temp = (GameObject) handler.getList().get(i);
             if (temp.getID() == ID.Enemy1 || temp.getID() == ID.Enemy2)
             {
                 if(getHitBox().intersects(temp.getHitBox())) {

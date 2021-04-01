@@ -1,11 +1,15 @@
-package com.game.objects;
+package com.game.engine;
 
 import com.game.ID;
 import com.game.Main;
+import com.game.gameObjects.GameObject;
+import com.game.gui.Table;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import static com.game.gui.Table.setGameState;
 
 public class KeyInput {
     //Variables
@@ -22,23 +26,23 @@ public class KeyInput {
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.SPACE)
                 {
-                    Main.setGameState(Main.STATE.Game);
-                    Main.STATE.Game.setState(scene);
+                    setGameState(Table.STATE.Game);
+                    Table.STATE.Game.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.O)
                 {
-                    Main.setGameState(Main.STATE.Options);
-                    Main.STATE.Options.setState(scene);
+                    setGameState(Table.STATE.Options);
+                    Table.STATE.Options.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.L)
                 {
-                    Main.setGameState(Main.STATE.HowTo);
-                    Main.STATE.HowTo.setState(scene);
+                    setGameState(Table.STATE.HowTo);
+                    Table.STATE.HowTo.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.H)
                 {
-                    Main.setGameState(Main.STATE.HighScore);
-                    Main.STATE.HighScore.setState(scene);
+                    setGameState(Table.STATE.HighScore);
+                    Table.STATE.HighScore.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -54,8 +58,8 @@ public class KeyInput {
             public void handle(KeyEvent keyEvent) {
 
                 if (keyEvent.getCode() == KeyCode.TAB){
-                    Main.setGameState(Main.STATE.Menu);
-                    Main.STATE.Menu.setState(scene);
+                    setGameState(Table.STATE.Menu);
+                    Table.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -71,8 +75,8 @@ public class KeyInput {
             public void handle(KeyEvent keyEvent) {
 
                 if (keyEvent.getCode() == KeyCode.TAB){
-                    Main.setGameState(Main.STATE.Menu);
-                    Main.STATE.Menu.setState(scene);
+                    setGameState(Table.STATE.Menu);
+                    Table.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -88,8 +92,8 @@ public class KeyInput {
             public void handle(KeyEvent keyEvent) {
 
                 if (keyEvent.getCode() == KeyCode.TAB){
-                    Main.setGameState(Main.STATE.Menu);
-                    Main.STATE.Menu.setState(scene);
+                    setGameState(Table.STATE.Menu);
+                    Table.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -110,19 +114,37 @@ public class KeyInput {
                     GameObject temp = handler.object.get(i);
                     if (temp.getID() == ID.Player)
                     {
-                        switch (keyEvent.getCode()){
-                            case W: temp.setMoveUp(true); temp.setMoveDown(false); break;
-                            case A: temp.setMoveLeft(true); temp.setMoveRight(false); break;
-                            case S: temp.moveDown = true; temp.moveUp = false; break;
-                            case D: temp.moveRight = true; temp.moveLeft = false; break;
-                            case CONTROL: temp.setVelX(temp.getLowSpeed()); temp.setVelY(temp.getLowSpeed()); break;
-                            case SHIFT: temp.setVelX(temp.getHighSpeed()); temp.setVelY(temp.getHighSpeed()); break;
+                        switch (keyEvent.getCode()) {
+                            case W -> {
+                                temp.setMoveUp(true);
+                                temp.setMoveDown(false);
+                            }
+                            case A -> {
+                                temp.setMoveLeft(true);
+                                temp.setMoveRight(false);
+                            }
+                            case S -> {
+                                temp.setMoveDown(true);
+                                temp.setMoveUp(false);
+                            }
+                            case D -> {
+                                temp.setMoveRight(true);
+                                temp.setMoveLeft(false);
+                            }
+                            case CONTROL -> {
+                                temp.setVelX(temp.getLowSpeed());
+                                temp.setVelY(temp.getLowSpeed());
+                            }
+                            case SHIFT -> {
+                                temp.setVelX(temp.getHighSpeed());
+                                temp.setVelY(temp.getHighSpeed());
+                            }
                         }
                     }
                 }
                 if (keyEvent.getCode() == KeyCode.TAB){
-                    Main.setGameState(Main.STATE.Menu);
-                    Main.STATE.Menu.setState(scene);
+                    setGameState(Table.STATE.Menu);
+                    Table.STATE.Menu.setState(scene);
                 }
                 if (keyEvent.getCode() == KeyCode.ESCAPE){
                     System.exit(1);
@@ -140,13 +162,19 @@ public class KeyInput {
                     GameObject temp = handler.object.get(i);
                     if (temp.getID() == ID.Player)
                     {
-                        switch (keyEvent.getCode()){
-                            case W: temp.moveUp = false; break;
-                            case A: temp.moveLeft = false; break;
-                            case S: temp.moveDown = false; break;
-                            case D: temp.moveRight = false; break;
-                            case CONTROL: temp.setVelX(temp.getMedSpeed()); temp.setVelY(temp.getMedSpeed()); break;
-                            case SHIFT: temp.setVelY(temp.getMedSpeed()); temp.setVelX(temp.getMedSpeed()); break;
+                        switch (keyEvent.getCode()) {
+                            case W -> temp.setMoveUp(false);
+                            case A -> temp.setMoveLeft(false);
+                            case S -> temp.setMoveDown(false);
+                            case D -> temp.setMoveRight(false);
+                            case CONTROL -> {
+                                temp.setVelX(temp.getMedSpeed());
+                                temp.setVelY(temp.getMedSpeed());
+                            }
+                            case SHIFT -> {
+                                temp.setVelY(temp.getMedSpeed());
+                                temp.setVelX(temp.getMedSpeed());
+                            }
                         }
                     }
                 }
